@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Trophy, Clock, Target, ArrowRight, ShieldAlert, Zap } from 'lucide-react';
+import { Trophy, Clock, Target, Activity } from 'lucide-react';
 import { API_URL } from '../config';
 
 interface QuizSummaryProps {

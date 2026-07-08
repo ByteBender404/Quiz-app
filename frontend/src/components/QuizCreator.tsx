@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, Trash2, ArrowLeft, Image as ImageIcon, CheckCircle, XCircle, BrainCircuit } from 'lucide-react';
+import { Plus, Trash2, Image as ImageIcon, CheckCircle, Upload, Sparkles, ChevronDown, ChevronUp } from 'lucide-react';
 import { API_URL } from '../config';
 import { useNavigate } from 'react-router-dom';
 
