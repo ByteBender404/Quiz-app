@@ -250,6 +250,15 @@ const QuizPlayer: React.FC = () => {
       if (roomCode) {
         const accuracy = Math.round((score / questions.length) * 100);
         socket.emit('player_completed', { roomCode, score, accuracy });
+        
+        // Ensure the multiplayer match counts towards their global dashboard stats
+        fetch(`${API_URL}/api/v1/quizzes/${quizId}/submit`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ score, totalQuestions: questions.length, timeSpentMs: Date.now() - startTime }),
+          credentials: 'include',
+        }).catch(err => console.error("Failed to submit multiplayer score:", err));
+
         setGameState('waiting');
       } else {
         setGameState('finished');
