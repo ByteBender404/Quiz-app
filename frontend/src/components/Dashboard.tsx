@@ -77,10 +77,10 @@ const Dashboard: React.FC = () => {
         method: 'GET', 
         credentials: 'include' 
       });
-      navigate('/');
+      window.location.href = '/';
     } catch (err) {
       console.error('Logout failed:', err);
-      navigate('/');
+      window.location.href = '/';
     }
   };
 
