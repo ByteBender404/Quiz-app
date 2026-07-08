@@ -3,6 +3,7 @@ import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { Clock, ShieldAlert, CheckCircle, XCircle, Trophy } from 'lucide-react';
 import QuizSummary from './QuizSummary';
 import { socket } from '../socket';
+import { API_URL } from '../config';
 
 interface Question {
   _id: string;
@@ -54,7 +55,7 @@ const QuizPlayer: React.FC = () => {
   useEffect(() => {
     const fetchQuiz = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/v1/quizzes/${quizId}`, {
+        const response = await fetch(`${API_URL}/api/v1/quizzes/${quizId}`, {
           credentials: 'include'
         });
         
@@ -91,7 +92,7 @@ const QuizPlayer: React.FC = () => {
     }
     
     if (roomCode) {
-      fetch('http://localhost:5000/api/auth/me', { credentials: 'include' })
+      fetch(`${API_URL}/api/auth/me`, { credentials: 'include' })
         .then(res => res.json())
         .then(data => {
           const username = data.data?.user?.username || 'PLAYER';
@@ -405,7 +406,7 @@ const QuizPlayer: React.FC = () => {
 
             {question.mediaUrl && (
               <div className="mb-8 rounded overflow-hidden border border-primary/30 mx-auto max-w-lg">
-                <img src={`http://localhost:5000${question.mediaUrl}`} alt="Question visual" className="w-full object-cover" />
+                <img src={`${API_URL}${question.mediaUrl}`} alt="Question visual" className="w-full object-cover" />
               </div>
             )}
 

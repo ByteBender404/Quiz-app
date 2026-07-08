@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Users, Server, Shield, Play } from 'lucide-react';
 import { socket } from '../socket';
+import { API_URL } from '../config';
 
 interface Quiz {
   _id: string;
@@ -24,8 +25,8 @@ const MultiplayerLobby: React.FC = () => {
     const fetchUserAndQuizzes = async () => {
       try {
         const [userRes, quizRes] = await Promise.all([
-          fetch('http://localhost:5000/api/auth/me', { credentials: 'include' }),
-          fetch('http://localhost:5000/api/v1/quizzes', { credentials: 'include' })
+          fetch(`${API_URL}/api/auth/me`, { credentials: 'include' }),
+          fetch(`${API_URL}/api/v1/quizzes`, { credentials: 'include' })
         ]);
         
         if (userRes.ok) {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { API_URL } from '../config';
 import { Trophy, Activity, Target, Plus, Users, Search, Trash2 } from 'lucide-react';
 
 interface Quiz {
@@ -21,8 +22,8 @@ const Dashboard: React.FC = () => {
     const fetchDashboardData = async () => {
       try {
         const [quizRes, userRes] = await Promise.all([
-          fetch('http://localhost:5000/api/v1/quizzes', { credentials: 'include' }),
-          fetch('http://localhost:5000/api/auth/me', { credentials: 'include' })
+          fetch(`${API_URL}/api/v1/quizzes`, { credentials: 'include' }),
+          fetch(`${API_URL}/api/auth/me`, { credentials: 'include' })
         ]);
 
         if (quizRes.ok) {
@@ -55,7 +56,7 @@ const Dashboard: React.FC = () => {
     if (!window.confirm('Are you sure you want to delete this quiz?')) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/quizzes/${quizId}`, {
+      const response = await fetch(`${API_URL}/api/v1/quizzes/${quizId}`, {
         method: 'DELETE',
         credentials: 'include',
       });
@@ -72,7 +73,7 @@ const Dashboard: React.FC = () => {
   const handleLogout = async () => {
     try {
       localStorage.removeItem('userId');
-      await fetch('http://localhost:5000/api/auth/logout', { 
+      await fetch(`${API_URL}/api/auth/logout`, { 
         method: 'GET', 
         credentials: 'include' 
       });

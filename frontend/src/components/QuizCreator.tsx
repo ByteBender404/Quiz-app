@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Plus, Trash2, Image as ImageIcon, CheckCircle, Upload, Sparkles, ChevronDown, ChevronUp } from 'lucide-react';
+import { Plus, Trash2, ArrowLeft, Image as ImageIcon, CheckCircle, XCircle, BrainCircuit } from 'lucide-react';
+import { API_URL } from '../config';
 import { useNavigate } from 'react-router-dom';
 
 type QuestionType = 'multiple_choice' | 'true_false' | 'fill_blank';
@@ -36,7 +37,7 @@ const QuizCreator: React.FC = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/v1/quizzes/generate-ai', {
+      const response = await fetch(`${API_URL}/api/v1/quizzes/generate-ai`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ topic: aiTopic, difficulty: aiDifficulty, numQuestions: Number(aiNumQuestions) }),
@@ -147,7 +148,7 @@ const QuizCreator: React.FC = () => {
 
     try {
       // 1. Create Quiz
-      const quizRes = await fetch('http://localhost:5000/api/v1/quizzes', {
+      const quizRes = await fetch(`${API_URL}/api/v1/quizzes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title, description, category }),
@@ -172,7 +173,7 @@ const QuizCreator: React.FC = () => {
           formData.append('media', q.file);
         }
 
-        const qRes = await fetch(`http://localhost:5000/api/v1/quizzes/${quizId}/questions`, {
+        const qRes = await fetch(`${API_URL}/api/v1/quizzes/${quizId}/questions`, {
           method: 'POST',
           body: formData,
           credentials: 'include',
