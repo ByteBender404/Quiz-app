@@ -9,7 +9,7 @@ const quizRoutes = require('./modules/quizzes/quiz.routes');
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:5173', // Or your frontend URL
+  origin: ['http://localhost:5173', 'https://quiz-arena-steel.vercel.app'],
   credentials: true
 }));
 app.use(express.json());
